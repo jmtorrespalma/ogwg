@@ -1,0 +1,55 @@
+
+                         Oldie Goldie Website Generator
+
+What is it?
+-----------
+
+The Oldie Goldie Website Generator is a simple but powerful static site
+generator. This aims to generate very simple websites based on pre-established
+templates and some of the Unix classic tools for parsing text. Was created to
+provide an easy and DIY method to generate the website tofcg.com.
+
+Latest version
+--------------
+
+The OGWG project is originally being hosted on Github, more concretely in the
+address https://github.com/jmtorrespalma/ogwg.git, but the intention is to
+migrate it to a private server while maintaining this one as a mirror.
+
+Licensing
+---------
+
+See the file accompanying this project called COPYING. In addition, all .html
+and .prehtml are under Creative Commons Attribution-ShareAlike 4.0
+International (CC BY-SA 4.0)
+
+Documentation
+-------------
+
+The only sources of documentation are this file, along with the commented
+souce code and the provided templates but due to the simplicity of the tool,
+it's considered to be enough.
+
+Here is some description on the project source tree:
+COPYING                  License of this program.
+README                   Introduction and info about the project.
+Makefile                 Makefile that generates all of webpages.
+
+include/                 Files that are required to generate webpages.
+
+main/                    Top sites of the website (e.g index.html)
+
+posts/                   Contains posts in .prehtml format.
+
+Building
+--------
+To build it, simply cd to project root directory and type:
+  make all
+
+Usage
+-----
+This project is now set for my personal preferences. If you want to use it as a
+blog just add your posts in .prehtml format to the posts directory. There is an
+example named 'posts/template-file.html' that you might use as a guide.
+
+Copyright (C) 2016 Juan Manuel Torres Palma <j.m.torrespalma@gmail.com>

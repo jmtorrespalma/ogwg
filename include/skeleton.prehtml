@@ -1,0 +1,12 @@
+<!-- This file is an skeleton on how every page format should work.
+     After applying the generation tool, it will look like a complete
+     html file. -->
+<!DOCTYPE html>
+<html lang="en"> <!-- Allows us to set different language in every file. -->
+<!-- <head> section will be inserted here. -->
+<body>
+	<!-- Header will be inserted here. -->
+	<!-- Content should go here. -->
+	<!-- Footer will go here. -->
+</body>
+</html>

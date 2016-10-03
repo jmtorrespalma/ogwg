@@ -1,0 +1,13 @@
+	<!-- Header of the webpage. -->
+	<div id="header">
+	<h1>The Old Fashioned Computer Geek</h1>
+	<h3>	<a href="index.html">home</a>
+		<a href="blog.html">blog</a>
+		<a href="archive.html">archive</a>
+		<a href="projects.html">projects</a>
+		<a href="cv.html">cv</a>
+		<a href="about.html">about</a>
+		<a href="changelog.html">changelog</a>
+		</h3>
+	</div>
+
