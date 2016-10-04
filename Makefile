@@ -85,6 +85,7 @@ $(MAIN_DIR)/blog.prehtml: $(RAW_POSTS) $(LATEST_POSTS)
 $(MAIN_DIR)/archive.prehtml: $(RAW_POSTS) $(SORT_POSTS_LIST)
 	@echo -n "Generating $@..."
 	@rm -f $@ tmp.txt
+	@touch tmp.txt
 	@cp include/skeleton.prehtml $@
 	@cut -d: -f2 $(SORT_POSTS_LIST) | uniq | \
 	while read -r DATE; \
