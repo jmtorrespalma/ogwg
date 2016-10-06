@@ -131,5 +131,5 @@ clean:
 # Cleans generated files *.prehtml and lists.
 mrproper: clean
 	@echo -n 'Deleting everything...'
-	@$(RM) -rf  $(GEN_MAIN) $(SORT_POSTS_LIST)
+	@$(RM) -rf  $(GEN_MAIN) $(SORT_POSTS_LIST) $(LATEST_POSTS)
 	@echo "done"
