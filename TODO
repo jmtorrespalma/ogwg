@@ -1,0 +1,12 @@
+# This is a list of wanted features for the project.
+
+ * Improve current .css template to get better readability, maybe setting black
+   color on the side margins. It's important to keep simplicity.
+ * Add cv, generated probably from .tex file.
+ * Decide which is the best design and purpose for the main page (news
+   probably)
+ * Projects page is useful to talk in detail about some of the project that I
+   have worked in, adding references to git server.
+ * Add support for automatic spell checking with hunspell or any other spell
+   checking tool.
+ * Write content for the project. (Personal)

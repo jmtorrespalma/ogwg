@@ -34,6 +34,7 @@ SHELL := /bin/bash
 
 # Variables related to the project
 DEST_DIR := ./tests
+DEST_POSTS_DIR := $(DEST_DIR)/posts
 POSTS_DIR := ./posts
 MAIN_DIR := ./main
 
@@ -51,19 +52,33 @@ RAW_MAIN := $(wildcard $(MAIN_DIR)/*.prehtml) $(GEN_MAIN)
 FORMATTED_MAIN := $(RAW_MAIN:.prehtml=.html)
 
 
+# Installation variables.
+MAIN_TARG := $(subst $(MAIN_DIR), $(DEST_DIR), $(FORMATTED_MAIN))
+POSTS_TARG := $(subst $(POSTS_DIR), $(DEST_POSTS_DIR), $(FORMATTED_POSTS))
+
+
 # Building rules
 
 all: $(FORMATTED_MAIN) $(FORMATTED_POSTS)
 
-# install: $(TARGETS)
+install: all $(MAIN_TARG) $(POSTS_TARG)
+
+
 
 # Final formatting rule, required by every single served page.
 %.html: %.prehtml $(INC)
 	@echo -n "Creating html file: $@..."
+	@if [ $$(dirname $@) = $$(basename $(POSTS_DIR)) ]; then\
+		$(SED) 's/href="/href="..\//g' include/header.prehtml >\
+			include/headersub.prehtml; \
+	else\
+		cp include/header.prehtml include/headersub.prehtml;\
+	fi
 	@$(SED) '/<html/ r include/head.prehtml' $< |\
-	$(SED) '/<body>/ r include/header.prehtml' |\
+	$(SED) '/<body>/ r include/headersub.prehtml' |\
 	$(AWK) '/<\/body>/{fl=$$0; while(getline<"include/footer.prehtml")\
 	{print}; print fl; next}1' > $@
+	@$(RM) include/headersub.prehtml
 	@echo "done"
 
 
@@ -72,11 +87,12 @@ $(MAIN_DIR)/blog.prehtml: $(RAW_POSTS) $(LATEST_POSTS)
 	@echo -n "Generating $@..."
 	@cp include/skeleton.prehtml $@
 	@FILES=$$(tac $(LATEST_POSTS)); \
+	PF=$$(basename $(DEST_POSTS_DIR)); \
 	for f in $$FILES; \
 	do \
 		NAM=$$(basename $$f | sed 's/pre//g'); \
 		sed -n '/<div class/,/<\/p>/p' $$f | sed '$$ a \\t</div>' | \
-		sed "$$ a \\\\t<a href=\"$$NAM\">Read more.<\/a>" | \
+		sed "$$ a \\\\t<a href=\"$$PF\/$$NAM\">Read more.<\/a>" | \
 		sed '$$ a \\t<hr>' | \
 		$(SED) -i '/<body>/ r /dev/stdin' $@; \
 	done
@@ -90,14 +106,15 @@ $(MAIN_DIR)/archive.prehtml: $(RAW_POSTS) $(SORT_POSTS_LIST)
 	@cut -d: -f2 $(SORT_POSTS_LIST) | uniq | \
 	while read -r DATE; \
 	do \
-		POSTS=$$(grep $$DATE $(SORT_POSTS_LIST) | cut -d: -f1); \
+		POSTS=$$(grep $$DATE $(SORT_POSTS_LIST) | cut -d: -f1);\
+		PF=$$(basename $(DEST_POSTS_DIR)); \
 		echo "<h3>$$DATE</h3>" >> tmp.txt; \
 		for P in $$POSTS; \
 		do \
 			TITLE=$$($(GREP) '<h2>' $$P | \
 			$(SED) -e 's/<\/\?h2>//g' -e 's/\t//g'); \
-			S_P=$$(basename $$P) ; \
-			echo "<a href=blog/$$S_P>$$TITLE.</a>" >> tmp.txt; \
+			S_P=$$(basename $$P | sed 's/.prehtml/.html/g') ; \
+			echo "<a href=$$PF/$$S_P>$$TITLE.</a>" >> tmp.txt; \
 		done; \
 		echo "<hr>" >> tmp.txt; \
 	done
@@ -120,16 +137,40 @@ $(LATEST_POSTS): $(SORT_POSTS_LIST)
 	@$(HEAD) -5 $< | cut -f1 -d: > $@
 	@echo "done"
 
-.PHONY: clean mrproper
+
+
+# Rules related to installation.
+$(DEST_DIR)/%.html: $(MAIN_DIR)/%.html
+	@echo -n "Installing $@..."
+	@cp $< $@
+	@echo "done"
+
+$(DEST_POSTS_DIR)/%.html: $(POSTS_DIR)/%.html
+	@if [ ! -d "$(DEST_POSTS_DIR)" ]; then mkdir -p $(DEST_POSTS_DIR); fi
+	@echo -n "Installing $@..."
+	@cp $< $@
+	@echo "done"
+
+.PHONY: clean mrproper uninstall debug
 
 # Cleans html files.
 clean:
 	@echo -n 'Cleaning builds...'
-	@$(RM) -rf  $(FORMATTED_MAIN) $(FORMATTED_POSTS)
+	@$(RM) -r $(FORMATTED_MAIN) $(FORMATTED_POSTS)
 	@echo "done"
 
 # Cleans generated files *.prehtml and lists.
 mrproper: clean
 	@echo -n 'Deleting everything...'
-	@$(RM) -rf  $(GEN_MAIN) $(SORT_POSTS_LIST) $(LATEST_POSTS)
+	@$(RM) -r $(GEN_MAIN) $(SORT_POSTS_LIST) $(LATEST_POSTS)
 	@echo "done"
+
+# Wipe out an installation folder.
+uninstall:
+	@echo -n 'Uninstalling...'
+	@$(RM) -r $(MAIN_TARG) $(POSTS_TARG)
+	@echo "done"
+
+debug:
+	@echo $(MAIN_TARG)
+	@echo $(POSTS_TARG)
