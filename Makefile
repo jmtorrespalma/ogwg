@@ -182,7 +182,7 @@ mrproper: clean
 # Wipe out an installation folder.
 uninstall:
 	@echo -n 'Uninstalling...'
-	@$(RM) -r $(MAIN_TARG) $(POSTS_TARG)
+	@$(RM) -r $(MAIN_TARG) $(POSTS_TARG) $(CSS_MAIN) $(CSS_POSTS)
 	@echo "done"
 
 debug:
