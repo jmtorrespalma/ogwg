@@ -55,13 +55,15 @@ FORMATTED_MAIN := $(RAW_MAIN:.prehtml=.html)
 # Installation variables.
 MAIN_TARG := $(subst $(MAIN_DIR), $(DEST_DIR), $(FORMATTED_MAIN))
 POSTS_TARG := $(subst $(POSTS_DIR), $(DEST_POSTS_DIR), $(FORMATTED_POSTS))
+CSS_MAIN := $(DEST_DIR)/style.css
+CSS_POSTS := $(DEST_POSTS_DIR)/style.css
 
 
 # Building rules
 
 all: $(FORMATTED_MAIN) $(FORMATTED_POSTS)
 
-install: all $(MAIN_TARG) $(POSTS_TARG)
+install: all $(MAIN_TARG) $(POSTS_TARG) $(CSS_POSTS) $(CSS_MAIN)
 
 
 
@@ -150,6 +152,18 @@ $(DEST_POSTS_DIR)/%.html: $(POSTS_DIR)/%.html
 	@echo -n "Installing $@..."
 	@cp $< $@
 	@echo "done"
+
+$(CSS_MAIN): style.css
+	@echo -n "Copying $@..."
+	@cp $< $@
+	@echo "done"
+
+$(CSS_POSTS): style.css
+	@echo -n "Copying $@..."
+	@cp $< $@
+	@echo "done"
+
+
 
 .PHONY: clean mrproper uninstall debug
 
