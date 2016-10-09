@@ -1,32 +1,19 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- Allows us to set different language in every file. -->
-<!-- <head> section will be inserted here. -->
+<html lang="en">
 <body>
-	<!-- Header will be inserted here. -->
 	<div id="content">
-	<h2>Post 0: Hello World</h2>
-	<small> 2016/10/02 </small>
-	<p>That's it. I'm finally doing it. After a few months and years of
-	having it in the to-do list, finally I have taken the time and patience
-	required to create my own webpage.</p>
-
-	<p>Currently I'm writing this from a コインランドリ (coin laundry) in
-	Gotanda, Tokyo. Today is October 2nd of 2016, and this is my first post
-	for my blog/webpage. It's probably the latest place that I would expect
-	to write my first post from, but life always has surprises. While
-	waiting for my laundry to finish, I start a new adventure online. How
-	beautiful and poetic does it sound?</p>
-
-	<p>Honestly, it must sound really weird that a 24 years old has decided
-	to write his own blog on his own, taking into account that living in a
-	time where Facebook, Instagram, Snapchat, and others are the de-facto
-	standard for sharing stuff about your life. <b>So why am I taking the
-	time to do all of this?</b> Probably this is all better explained in
-	the 'about' page, but basically, I don't like giving my data, rights
-	over my work and free information to some _evil_ companies. In
-	addition, I like sharing my life with people who care about me and I
-	can share in the way I want, not the predefined way those applications
-	are forcing me to do it.</p>
+	<h2>About this webpage</h2>
+	<p>The main purpose of this webpage is mostly being useful to me, the
+	author (see net section for details). I wanted to have a webpage for
+	many reasons, but mostly, in a true good hearted intention to do
+	something usefull in this world and share what I know, what I do
+	and what I think about many different topics. As a computer engineer,
+	I like sharing what I do and keep track of what I do and learn,
+	cause sometimes it's important to go back and know how I solved a
+	previous problem. Hopefully, apart from being useful to me in many
+	different ways (I tend to forget stuff sometimes), some people learning
+	about the same things, or willing to criticise me for not knowing what
+	I am talking about, can make good use of it.</p>
 
 	<p>My goal is using this blog to share what I know, keep learning, and
 	be able to share my experiences and thoughts. I don't even know what I
@@ -34,6 +21,38 @@
 	travelling and even personal experiences. Weird combination right? I
 	guess it will be hard to choose a topic for this blog, but plain and
 	simple, the topic is anything I want to write about.</p>
+
+	<p>The name of this site is not a random name, it makes sense. I was
+	born at the beginning of the 90s, when technologies like internet and
+	PCs were still in a very early stage, but most technologies at that
+	point were simple enough to be possible for a person to understand
+	them.</p>
+
+	<p>This is my website, personal website, so I take responsability for
+	everything that is said here, however, that also allows me to say
+	anything I want, and In any way that I want. That's why swearing
+	and cursing happens often I mostly write in English about computer
+	related stuff, but simce my family is all Spanish and I don't want
+	them to feel left apart, I sporadically write in Spanish too. Japanese
+	is not common at all, but I am learning the language so sometimes I do
+	it as it is useful in my learning process</p>
+
+	<p>A los que habláis español, bienvenidos, en esta web hablo de todo un
+	pero sobre todo en inglés por motivos de eficiencia. Un texto en inglés
+	tiene una audiencia potencial mayor, por lo que puede ser útil a más
+	gente. Otro motivo es porque en este mundillo de la tecnología, el
+	inglés es el lenguaje estándar así que para mantener la documentación
+	compacta prefiero hacerlo en inglés. En realidad, dependiendo del tema
+	que quiero tratar, y de la audiencia a la que me estoy destinando
+	utilizo un idioma u otro. Familia, siempre que hable de vosotros lo
+	haré en español, pero me gustaría que esto os sirviera como una
+	motivación para aprender inglés, que nunca es tarde ;) </p>
+
+	<p>All the content in this web is released under the CC-BY-SA 4.0, so
+	feel free to share the content in any way, but of course, giving me some
+	credit for doing part of the work. In addition, all of the source code
+	is under GPL v3 unless stated explicitely. </p>
+
 
 	<p>Maybe you have noticed the strange title of the post, have you?
 	Well, for geeks and technology savvy people it's not much of a surprise
@@ -50,7 +69,10 @@
 	starting to count from zero is good, let me know in the comments, but
 	oh wait!...there are no goddamn comments in this blog. If there were, I
 	would ignore them anyway.</p>
+	<hr>
 
+	<h2>About the author</h2>
+Yeah, I said computer engineer. I think that
 	</div>
 	<!-- Footer will go here. -->
 </body>
