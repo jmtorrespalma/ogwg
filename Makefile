@@ -47,7 +47,8 @@ SORT_POSTS_LIST := $(POSTS_DIR)/posts-list.txt
 LATEST_POSTS := $(POSTS_DIR)/latest-posts.txt
 
 # Main files explicit on the top of every page.
-GEN_MAIN := $(MAIN_DIR)/archive.prehtml $(MAIN_DIR)/blog.prehtml
+GEN_MAIN := $(MAIN_DIR)/archive.prehtml $(MAIN_DIR)/blog.prehtml \
+		$(MAIN_DIR)/cv.prehtml
 RAW_MAIN := $(wildcard $(MAIN_DIR)/*.prehtml) $(GEN_MAIN)
 FORMATTED_MAIN := $(RAW_MAIN:.prehtml=.html)
 
@@ -125,6 +126,17 @@ $(MAIN_DIR)/archive.prehtml: $(RAW_POSTS) $(SORT_POSTS_LIST)
 	@$(RM) tmp.txt
 	@echo "done"
 
+$(MAIN_DIR)/cv.prehtml: extra/cv.tex
+	@echo -n "Generating $@..."
+	@TDIR=$$(mktemp -d); \
+	latex2html -dir $$TDIR -split 0 -info 0 -lcase_tags -no_navigation \
+	-no_subdir -style style.css $< > /dev/null 2>&1; \
+	mv $$TDIR/cv.html tmp.prehtml; $(RM) -r $$TDIR
+	@$(SED) -n '/<body >/,/<\/body>/p' tmp.prehtml | \
+	$(SED) -e '1 i <!DOCTYPE html>\n<html lang="en">' \
+	-e '$$ i <\/html>' -e 's/<body >/<body>/g' > $@
+	@$(RM) tmp.prehtml
+	@echo "done"
 
 # List with all posts sorted by date, newest to oldest.
 $(SORT_POSTS_LIST): $(RAW_POSTS)

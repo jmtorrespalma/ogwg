@@ -1,0 +1,174 @@
+\documentclass[a4paper,10pt]{article}
+
+%A Few Useful Packages
+\usepackage{html}
+\usepackage{marvosym}
+\usepackage{fontspec}				%for loading fonts
+\usepackage{xunicode,xltxtra,url,parskip}%other packages for formatting
+\RequirePackage{color,graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[big]{layaureo}			%better formatting of the A4 page
+% an alternative to Layaureo can be ** \usepackage{fullpage} **
+\usepackage{supertabular}			%for Grades
+\usepackage{titlesec}					%custom \section
+\usepackage{graphicx}					%for picture
+
+%Setup hyperref package, and colours for links
+\usepackage{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour, linkcolor=linkcolour}
+
+%FONTS
+\defaultfontfeatures{Mapping=tex-text}
+%\setmainfont[SmallCapsFont = Fontin SmallCaps]{Fontin}
+%%% modified for Karol Kozioł for ShareLaTeX use
+\setmainfont[
+SmallCapsFont = Fontin-SmallCaps.otf,
+BoldFont = Fontin-Bold.otf,
+ItalicFont = Fontin-Italic.otf
+]
+{Fontin.otf}
+%%%
+
+%CV Sections inspired by:
+%http://stefano.italians.nl/archives/26
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{3pt}{3pt}
+%Tweak a bit the top margin
+%\addtolength{\voffset}{-1.3cm}
+
+%Italian hyphenation for the word: ''corporations''
+\hyphenation{im-pre-se}
+
+%-------------WATERMARK TEST [**not part of a CV**]---------------
+\usepackage[absolute]{textpos}
+
+\setlength{\TPHorizModule}{30mm}
+\setlength{\TPVertModule}{\TPHorizModule}
+\textblockorigin{2mm}{0.65\paperheight}
+\setlength{\parindent}{0pt}
+
+%--------------------BEGIN DOCUMENT----------------------
+\begin{document}
+
+%WATERMARK TEST [**not part of a CV**]---------------
+%\font\wm=''Baskerville:color=787878'' at 8pt
+%\font\wmweb=''Baskerville:color=FF1493'' at 8pt
+%{\wm
+%	\begin{textblock}{1}(0,0)
+%		\rotatebox{-90}{\parbox{500mm}{
+%			Typeset by Alessandro Plasmati with \XeTeX\  \today\ for
+%			{\wmweb \href{http://www.aleplasmati.comuv.com}{aleplasmati.comuv.com}}
+%		}
+%	}
+%	\end{textblock}
+%}
+
+\pagestyle{empty} % non-numbered pages
+
+\font\fb=''[cmr10]'' %for use with \LaTeX command
+
+%--------------------TITLE-------------
+\par{\centering
+		{\Huge Juan Manuel \textsc{Torres Palma}
+	}\bigskip\par}
+
+%--------------------SECTIONS-----------------------------------
+%Section: Personal Data
+\section{Personal Data}
+
+\begin{tabular}{rl}
+
+    \textsc{First name:} & Juan Manuel \\
+    \textsc{Surnames:} & Torres Palma \\
+    \textsc{email:}     & j dot m dot torrespalma at gmail dot com}\\
+    \textsc{GitHub:}     & \url{https://www.github.com/jmtorrespalma}
+\end{tabular}
+
+%Section: Work Experience at the top
+\section{Work Experience}
+\begin{tabular}{r|p{11cm}}
+
+\textsc{Summer 2016} & Software engineer at \textsc{Sony Corp.},
+Tokyo, Japan\\&\footnotesize{Development and optimization of libraries
+based on OpenCV targeting biometric authentication systems. As part of R\&D
+team, developed several methods and techniques that will be used in the future.}
+ \\\multicolumn{2}{c}{} \\
+
+\textsc{Summer 2015} & Linux Kernel developer at \textsc{Sony Corp.},
+Tokyo, Japan\\&\footnotesize{Research and production work with Sony
+digital cameras, focusing on improving real-time capabilities of
+the system and specially for the system scheduler.} \\\multicolumn{2}{c}{} \\
+
+\textsc{Summer 2014} & Embedded systems programmer at \textsc{Infineon Tech}, Munich, Germany\\&\footnotesize{Worked with ARM Cortex-M microcontrollers, writing code for Contiki OS, including drivers and wireless transceiver devices. Also ported Contiki OS for a home automation (domotics and WSN) project.} \\\multicolumn{2}{c}{} \\
+
+\textsc{Summer 2013} & Summer Intern as database programmer at \textsc{Axesor}, Granada\\&\footnotesize{Received job offer from Adaptalia as a very good knowledge of database programming. Helped me improving my teamwork, creativity, stress tolerance and planning skills}
+\end{tabular}
+
+%Section: Education
+\section{Education}
+\begin{tabular}{rl}
+\textsc{July} 2016 & Master of Science in \textsc{Computer Engineering}\\
+& 9/10 | \textbf{University of Granada}, Spain\\
+& Specialization: ``Embedded systems'' \\\\
+\textsc{Sept.} 2015& Bachelor of Science in \textsc{Computer Engineering}\\
+& 8.1/10 | \textbf{University of Granada}, Spain\\
+& Specialization: ``Computer engineering and networking'' \\\\
+\textsc{June} 2010&  High School \textbf{``IES Padre Suarez''}, Granada | Final Grade: 9/10
+\end{tabular}
+
+%Section: Scholarships and additional info
+\section{Scholarships and Certificates}
+\begin{tabular}{rl}
+ \textsc{Sept.} 2008-\textsc{Now} & Spanish government scholarship for undergraduate students with \\&good grades \footnotesize (approx. 1500€/year plus free university fees)
+\end{tabular}
+
+%Section: Languages
+\section{Languages}
+\begin{tabular}{rl}
+ \textsc{Spanish:}&Mothertongue\\
+\textsc{English:}&Fluent. TOEFL IBT score of 96\\
+\end{tabular}
+
+\section{Computer Skills}
+\begin{tabular}{rl}
+Basic Knowledge:& Linux Kernel Development, \textsc{Python}, Octave/MATLAB,
+\textsc{R}\\
+Intermediate Knowledge:& \textsc{ARM} and \textsc{x86(\_64)} assembly, electronics\\
+Advanced Knowledge:& \textsc{C/C++}, \textsc{GNU/Linux} command line\\
+\end{tabular}
+
+\section{Interests and Activities}
+Computers, OS Development, Linux Kernel, Open-Source, Systems Software,
+Embedded Systems, \textsc{GNU/Linux}, Fedora, Android, Raspberry Pi... \\
+Debuggers, Compilers, Low-level Programming, Microcontrollers...\\
+Sports, Fitness, Healthy lifestyle, Travelling, Music, Cooking, Learning, Making new friends...
+
+\section{Projects}
+\begin{tabular}{r|p{11cm}}
+\textsc{May. 2013-Sept. 2015} & ISO C11 threads.h implementation for GNU C
+Library \\&\emph{Library implementation for GNU C Library}\\&
+\footnotesize{Implementation of the ISO C11 threads.h specification
+for GNU C Library based on POSIX threads as part of Bachelor's Thesis.
+Contribution for an important open source project as GNU. Qualified
+with Honors by the ATC department in Universidad
+de Granada.}\\\multicolumn{2}{c}{} \\
+
+\textsc{Sept. 2013-Now} & UGR Aerospace Program \\&\emph{System software for a life-critical system}\\&\footnotesize{Design and implementation of a life-critical system for a high altitude balloon. The mission consists on sending it 40 Km over the Earth surface to take measures and study atmospherical conditions. \emph{In progress}. Website: \url{http://atcproyectos.ugr.es/ugrasp/blog/}  } \\\multicolumn{2}{c}{} \\
+
+\textsc{Nov. 2014-Feb. 2015} & FreeRTOS port for RedWire Econotag \\&\emph{Real-time OS port}\\&\footnotesize{Port of the well-known RTOS for microcontrollers FreeRTOS. This port is for an ARM7TDMI based board, known as RedWire Econotag. The purpose of this project is educational, to prove a deep understanding of operating systems and embedded systems. Completed, but not uploaded to GitHub due to license issues.} \\\multicolumn{2}{c}{} \\
+
+\textsc{Feb. 2014-Jul. 2014} & MP3 Player \\&\emph{DIY MP3 player}\\&\footnotesize{MP3 player device built with Cypress PSOC. Implements a sofware decoder of MP3 files in C from scratch, and connects its output to a Digital to Analog Converter, allowing the device to play MP3 music files. GitHub: \url{https://github.com/jmtorrespalma/MP3Player}} \\\multicolumn{2}{c}{} \\
+
+\textsc{Feb. 2014-Jul. 2014} & Sumo robot \\&\emph{Microcontroller based robot}\\&\footnotesize{Robot built with a PIC18F4550 based board (Arduino-like). Uses multiple sensors and servos, to move and interact with environment. Will be used in a competition between robots, in a sumo-like battle. GitHub: \url{https://github.com/jmtorrespalma/SumoRobot}} \\\multicolumn{2}{c}{} \\
+
+\textsc{Sept. 2013-Feb. 2014} & Reduced Solar System app.\\&\emph{GNU/Linux app}\\&\footnotesize{App developed in C++ using OpenGL. Created for teaching purposes and understanding of OpenGL, GLUT and GLU API's. GitHub: \url{https://github.com/jmtorrespalma/Simplified-Solar-System-app}} \\\multicolumn{2}{c}{} \\
+
+\end{tabular}
+\vfill\footnotesize{Last edit \today}
+%\newpage
+%\hypertarget{gmat}{\textsc{Gmat}\setmainfont{LMRoman10 Regular}\textregistered\setmainfont[SmallCapsFont=Fontin-SmallCaps]{Fontin-Regular}}
+
+%\XeTeXpdffile ''GMAT.pdf'' page 1 scaled 800
+
+\end{document}
