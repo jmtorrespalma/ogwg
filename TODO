@@ -2,9 +2,7 @@
 
  * Improve current .css template to get better readability, maybe setting black
    color on the side margins. It's important to keep simplicity.
- * Add cv, generated probably from .tex file. Using latex2html is very suitable
-   for this task, but it's important to tweak it to generate the html in a
-   proper format.
+ * Add support for changelog by using rsync..
  * Decide which is the best design and purpose for the main page (news
    probably)
  * Projects page is useful to talk in detail about some of the project that I
