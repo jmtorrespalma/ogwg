@@ -33,6 +33,7 @@ HEAD := head
 SHELL := /bin/bash
 
 # Variables related to the project
+DEST_REMOTE := ../www
 DEST_DIR := ../install
 DEST_POSTS_DIR := $(DEST_DIR)/posts
 DEST_EXTRA_DIR := $(DEST_DIR)/extra
@@ -72,6 +73,7 @@ local-install: all $(MAIN_TARG) $(POSTS_TARG) $(CSS_POSTS) $(CSS_MAIN)\
 	$(EXTRA_TARG)
 
 install: local-install
+	rsync -rtv $(DEST_DIR)/ $(DEST_REMOTE)
 
 # Final formatting rule, required by every single served page.
 %.html: %.prehtml $(INC)
