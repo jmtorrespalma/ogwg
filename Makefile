@@ -33,8 +33,10 @@ HEAD := head
 SHELL := /bin/bash
 
 # Variables related to the project
-DEST_DIR := ./tests
+DEST_DIR := ../install
 DEST_POSTS_DIR := $(DEST_DIR)/posts
+DEST_EXTRA_DIR := $(DEST_DIR)/extra
+EXTRA_DIR := ./extra
 POSTS_DIR := ./posts
 MAIN_DIR := ./main
 
@@ -58,15 +60,18 @@ MAIN_TARG := $(subst $(MAIN_DIR), $(DEST_DIR), $(FORMATTED_MAIN))
 POSTS_TARG := $(subst $(POSTS_DIR), $(DEST_POSTS_DIR), $(FORMATTED_POSTS))
 CSS_MAIN := $(DEST_DIR)/style.css
 CSS_POSTS := $(DEST_POSTS_DIR)/style.css
+EXTRA_FILES := $(wildcard $(EXTRA_DIR)/*)
+EXTRA_TARG := $(subst $(EXTRA_DIR), $(DEST_EXTRA_DIR), $(EXTRA_FILES))
 
 
 # Building rules
 
 all: $(FORMATTED_MAIN) $(FORMATTED_POSTS)
 
-install: all $(MAIN_TARG) $(POSTS_TARG) $(CSS_POSTS) $(CSS_MAIN)
+local-install: all $(MAIN_TARG) $(POSTS_TARG) $(CSS_POSTS) $(CSS_MAIN)\
+	$(EXTRA_TARG)
 
-
+install: local-install
 
 # Final formatting rule, required by every single served page.
 %.html: %.prehtml $(INC)
@@ -93,10 +98,10 @@ $(MAIN_DIR)/blog.prehtml: $(RAW_POSTS) $(LATEST_POSTS)
 	PF=$$(basename $(DEST_POSTS_DIR)); \
 	for f in $$FILES; \
 	do \
-		NAM=$$(basename $$f | sed 's/pre//g'); \
-		sed -n '/<div class/,/<\/p>/p' $$f | sed '$$ a \\t</div>' | \
-		sed "$$ a \\\\t<a href=\"$$PF\/$$NAM\">Read more.<\/a>" | \
-		sed '$$ a \\t<hr>' | \
+		NAM=$$(basename $$f | $(SED) 's/pre//g'); \
+		$(SED) -n '/<div class/,/<\/p>/p' $$f | $(SED) '$$ a \\t</div>' | \
+		$(SED) "$$ a \\\\t<a href=\"$$PF\/$$NAM\">Read more.<\/a>" | \
+		$(SED) '$$ a \\t<hr>' | \
 		$(SED) -i '/<body>/ r /dev/stdin' $@; \
 	done
 	@echo "done"
@@ -116,7 +121,7 @@ $(MAIN_DIR)/archive.prehtml: $(RAW_POSTS) $(SORT_POSTS_LIST)
 		do \
 			TITLE=$$($(GREP) '<h2>' $$P | \
 			$(SED) -e 's/<\/\?h2>//g' -e 's/\t//g'); \
-			S_P=$$(basename $$P | sed 's/.prehtml/.html/g') ; \
+			S_P=$$(basename $$P | $(SED) 's/.prehtml/.html/g') ; \
 			echo "<a href=$$PF/$$S_P>$$TITLE.</a>" >> tmp.txt; \
 		done; \
 		echo "<hr>" >> tmp.txt; \
@@ -126,7 +131,7 @@ $(MAIN_DIR)/archive.prehtml: $(RAW_POSTS) $(SORT_POSTS_LIST)
 	@$(RM) tmp.txt
 	@echo "done"
 
-$(MAIN_DIR)/cv.prehtml: extra/cv.tex
+$(MAIN_DIR)/cv.prehtml: cv.tex
 	@echo -n "Generating $@..."
 	@TDIR=$$(mktemp -d); \
 	latex2html -dir $$TDIR -split 0 -info 0 -lcase_tags -no_navigation \
@@ -153,7 +158,7 @@ $(LATEST_POSTS): $(SORT_POSTS_LIST)
 
 
 
-# Rules related to installation.
+# Rules related to local installation.
 $(DEST_DIR)/%.html: $(MAIN_DIR)/%.html
 	@echo -n "Installing $@..."
 	@cp $< $@
@@ -175,6 +180,11 @@ $(CSS_POSTS): style.css
 	@cp $< $@
 	@echo "done"
 
+$(DEST_EXTRA_DIR)/%: $(EXTRA_DIR)/%
+	@if [ ! -d "$(DEST_EXTRA_DIR)" ]; then mkdir -p $(DEST_EXTRA_DIR); fi
+	@echo -n "Copying $@..."
+	@cp $< $@
+	@echo "done"
 
 
 .PHONY: clean mrproper uninstall debug

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+	<div id="content">
+	<h2>Projects</h2>
+	<p>List of projects on which I have worked on and I consider
+	interesting talking about.</p>
+	</div>
+	<!-- Footer will go here. -->
+</body>
+</html>

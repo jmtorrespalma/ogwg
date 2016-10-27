@@ -2,7 +2,8 @@
 
  * Improve current .css template to get better readability, maybe setting black
    color on the side margins. It's important to keep simplicity.
- * Add support for changelog by using rsync..
+ * Add support for changelog. Best option must be comparing using only
+   diff and compare directories and its contents.
  * Decide which is the best design and purpose for the main page (news
    probably)
  * Projects page is useful to talk in detail about some of the project that I
